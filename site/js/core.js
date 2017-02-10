@@ -7,9 +7,19 @@
 			super();
 			this.runner = Runner.instance_;
 			this.rex = Runner.instance_.tRex;
+			this.horizon = Runner.instance_.horizon;
 			// Create assets for the dino's neural network
 			this.nn = new synaptic.Architect.Perceptron(2, 10, 1);
 			this.trainer = new synaptic.Trainer(this.nn);
+			var me = this;
+			setTimeout(() => {
+				me.emit('ready');
+			}, 100);
+			this.loop = setInterval(() => {
+				if (me.rex.status == "RUNNING") {
+					// TODO : handle incoming obstacles
+				}
+			}, 1);
 		}
 		play() {
 			dino.runner.loadSounds();
