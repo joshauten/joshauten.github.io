@@ -10,21 +10,21 @@
 		constructor(file, name) {
 			this.fileName = file;
 			this.name = name;
+			this.elem = document.createElement('script');
 		}
 		load() {
 			var me = this;
 			return new Promise((resolve, reject) => {
-				var s = document.createElement('script');
-				s.src = me.fileName;
-				s.type = "text/javascript";
-				s.addEventListener('load', function onLoad() {
+				me.elem.src = me.fileName;
+				me.elem.type = "text/javascript";
+				me.elem.addEventListener('load', function onLoad() {
 					setTimeout(() => {
 						console.log("Loaded module '" + me.name + "'");
-						s.removeEventListener('load', onLoad, false);
+						me.elem.removeEventListener('load', onLoad, false);
 						resolve();
 					});
 				});
-				document.body.appendChild(s);
+				document.body.appendChild(me.elem);
 			});
 		}
 	}
