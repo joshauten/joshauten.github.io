@@ -31,10 +31,12 @@
 	window.modules = {
 		runner: new Module('site/js/dino.js', 'Runner'),
 		synaptic: new Module('site/js/synaptic.js', 'Synaptic'),
-		jquery: new Module('site/js/jquery.js', 'JQuery')
+		jquery: new Module('site/js/jquery.js', 'JQuery'),
+		eventEmitter: new Module('site/js/EventEmitter.min.js', 'EventEmitter')
 	}
 	window.addEventListener('load', () => {
 		modules.jquery.load()
+		.then(() => modules.eventEmitter.load())
 		.then(() => modules.synaptic.load())
 		.then(() => modules.runner.load())
 		.then(() => {
